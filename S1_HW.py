@@ -1,16 +1,30 @@
+# Methods
+def get_num(msg):
+    while True:
+        try:
+            val = float(input(msg))
+        except ValueError:
+            print("Требуется число")
+        else:
+            return val
+
+
 # Напишите программу, которая принимает на вход цифру, обозначающую день недели, и
 # проверяет, является ли этот день выходным.
 def get_weekend_by_weekday():
     while True:
         try:
             numDay = int(input("Ввести цифру дня недели: "))
-        except:
-            print("Что то не то")
+            if not (0 < numDay < 8):
+                raise Exception("В неделе только 7 дней")
+        except ValueError:
+            print("Ожидается число")
+        except Exception as e:
+            print(e)
         else:
-            if 0 < numDay <= 7:
-                print("Выходной" if numDay > 5 else "Будний")
-                break
-            print("В неделе только 7 дней")
+            break
+    print("Выходной" if numDay > 5 else "Будний")
+
 
 # get_weekend_by_weekday()
 
@@ -37,28 +51,29 @@ def predicate():
 # Напишите программу, которая принимает на вход координаты точки(X и Y),
 # причём X ≠ 0 и Y ≠ 0 и выдаёт номер четверти плоскости, в которой находится эта точка(или на какой оси она находится).
 def quarter_by_point():
-    x = int(input("Ввод X: "))
-    y = int(input("Ввод Y: "))
+    x = get_num("Ввод X: ")
+    y = get_num("Ввод Y: ")
     quart = 0
 
     if (x == 0 or y == 0):
-        print(f"Точка находится на координате.")
-
-    if (x > 0):
-        if (y > 0):
-            quart = 1
-        elif (y < 0):
-            quart = 2
-
+        print(f"Точка находится на оси.")
     else:
-        if (y > 0):
-            quart = 4
-        elif (y < 0):
-            quart = 3
+        if (x > 0):
+            if (y > 0):
+                quart = 1
+            else:
+                quart = 2
 
-    print(f"Точка находится в {quart} четверти.")
+        else:
+            if (y > 0):
+                quart = 4
+            else:
+                quart = 3
 
-# quarter_by_point()
+        print(f"Точка находится в {quart} четверти.")
+
+
+quarter_by_point()
 
 
 # __________________________
@@ -102,18 +117,8 @@ def distance_2d():
 
     dist = ((a.get('x') - b.get('x')) ** 2 +
             (a.get('y') - b.get('y')) ** 2) ** 0.5
-    # dist = Math.Sqrt(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2))
+
     print(f"Расстояние между A и B = {dist - dist % 0.01}")
 
 
-def get_num(msg):
-    while True:
-        try:
-            val = float(input(msg))
-        except ValueError:
-            print("Требуется число")
-        else:
-            return val
-
-
-distance_2d()
+# distance_2d()
