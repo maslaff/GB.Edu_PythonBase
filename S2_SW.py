@@ -1,0 +1,1 @@
+print("fwer".find("we"))
