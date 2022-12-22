@@ -22,8 +22,9 @@ def get_num(msg):
 
 
 def sum_dig_of_float():
-    # in_num = input("Введите число: ") # Так можно вводить вещественное число с запятой как в примере
-    # Так только с точкой, но зато с проверкой ввода
+    # *!!! Так можно вводить вещественное число с запятой как в примере
+    # in_num = input("Введите число: ")
+    # * Так только с точкой, но зато с проверкой ввода
     in_num = str(get_num("Введите число: "))
     acc = 0
     for i in in_num:
@@ -33,7 +34,7 @@ def sum_dig_of_float():
     print(acc)
 
 
-# sum_dig_of_float()
+sum_dig_of_float()
 
 
 # Задайте список из n чисел последовательности (1 + 1/n)**n,
@@ -71,4 +72,4 @@ def shuffle_list_wo_lib():
     print(my_list)
 
 
-shuffle_list_wo_lib()
+# shuffle_list_wo_lib()
