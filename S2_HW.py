@@ -67,7 +67,6 @@ def shuffle_list_wo_lib():
     for i in range(len(my_list)):
         random_int = int(
             len(my_list)*((time.clock_gettime_ns(time.CLOCK_MONOTONIC_RAW) % 100/100)))
-        print(random_int)
         my_list.insert(random_int, my_list.pop(i))
     print(my_list)
 
