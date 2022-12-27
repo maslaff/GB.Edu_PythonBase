@@ -45,15 +45,15 @@ def mul_numpare():
 # [1.1, 1.2, 3.1, 5, 10.01] => 0.19
 def dif_minmax_fract(num_list):
     nl = [int(i*100) % 100 for i in num_list]
-    min = nl[0]
-    max = nl[0]
+    nmin = nl[0]
+    nmax = nl[0]
     for i in nl:
         if i:
-            if i < min:
-                min = i
-            elif i > max:
-                max = i
-    print(f"{num_list} => {(max-min)/100}")
+            if i < nmin:
+                nmin = i
+            elif i > nmax:
+                nmax = i
+    print(f"{num_list} => {(nmax-nmin)/100}")
 
 
 dif_minmax_fract([1.1, 1.2, 3.1, 5, 10.01])
