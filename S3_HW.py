@@ -43,20 +43,20 @@ def mul_numpare():
 # найдёт разницу между максимальным и минимальным значением дробной части элементов, отличной от 0.
 # Пример:
 # [1.1, 1.2, 3.1, 5, 10.01] => 0.19
-def dif_minmax_fract():
-    num_list = [1.1, 1.2, 3.1, 5, 10.01]
-    min, max = num_list[0], num_list[0]
-    for i in num_list:
-        fract = int(i*100 % 100)
-        if fract:
-            if fract < min:
-                min = fract
-            elif fract > max:
-                max = fract
+def dif_minmax_fract(num_list):
+    nl = [int(i*100) % 100 for i in num_list]
+    min = nl[0]
+    max = nl[0]
+    for i in nl:
+        if i:
+            if i < min:
+                min = i
+            elif i > max:
+                max = i
     print(f"{num_list} => {(max-min)/100}")
 
 
-# dif_minmax_fract()
+dif_minmax_fract([1.1, 1.2, 3.1, 5, 10.01])
 
 
 # Напишите программу, которая будет преобразовывать десятичное число в двоичное.
@@ -72,7 +72,7 @@ def dec_to_bin(n):
     print(f"{n} -> {''.join(a)}")
 
 
-dec_to_bin(45)
+# dec_to_bin(45)
 
 # Задайте число. Составьте список чисел Фибоначчи, в том числе для отрицательных индексов.
 # Пример:
