@@ -18,18 +18,21 @@ powchar_list = '⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ⁱ
 
 
 # Преобразует целые числа в (юникод) надстрочные
-def powch(num):
+def num_to_powch(num):
     if num < 2:
         return ''
 
     if num < 10:
         return powchar_list[num]
 
-    pw = ''
-    while num >= 1:
-        pw = powchar_list[int(num % 10)] + pw
-        num /= 10
-    return pw
+    # pw = ''
+    # while num >= 1:
+    #     pw = powchar_list[int(num % 10)] + pw
+    #     num /= 10
+
+    # pw = [powchar_list[i] for i in str(num)]
+    # return pw
+    return ''.join([powchar_list[int(i)] for i in str(num)])
 
 
 # Возвращает словарь коэффициентов для степеней до k
@@ -63,7 +66,7 @@ def polynom_to_str(polydict: dict, verbose=False):
                 polynom_str += '-'
 
             if powr:
-                polynom_str += f"x{powch(powr)}" if not verbose else f"*x**{powr}"
+                polynom_str += f"x{num_to_powch(powr)}" if not verbose else f"*x**{powr}"
 
     return polynom_str.replace(' + -', ' - ') + ' = 0'
 
