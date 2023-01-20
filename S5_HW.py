@@ -237,5 +237,15 @@ def rle(data: str):
         return "Неверный формат строки"
 
 
-print(rle('aaaaabbbcccc'))
-print(rle('5a3b4c'))
+raw_file = 'raw_data'
+conv_file = 'conv_data'
+
+
+def rle_start():
+    with open(raw_file, 'r') as fread, open(conv_file, 'w') as fwrite:
+        fwrite.write('\n'.join(map(rle, [i.strip()
+                     for i in fread.readlines()])))
+
+
+# rle_start()
+# _________________________________________________________________________
