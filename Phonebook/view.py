@@ -66,3 +66,8 @@ def edit_contact(phonebook: list):
     field = get_num('Введите поле для изменения: ', 3)
     value = input('Введите новое значение: ')
     return contact-1, field-1, value
+
+
+def delete_contact(phonebook: list):
+    show_contacts(phonebook)
+    return get_num('Введите номер контакта: ', len(phonebook))

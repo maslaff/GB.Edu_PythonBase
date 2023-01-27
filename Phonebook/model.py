@@ -44,3 +44,7 @@ def search_contact(search: str):
 
 def update_contact(contact, field, new_value):
     phonebook[contact][field] = new_value
+
+
+def remove_contact(contact):
+    phonebook.pop(contact)
