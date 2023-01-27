@@ -22,6 +22,6 @@ def start_session():
                 model.update_contact(*view.edit_contact(model.get_phonebook()))
             case 6:
                 model.remove_contact(
-                    view.delete_contact(model.get_phonebook()))
+                    view.delete_contact(model.get_phonebook())-1)
             case 7:
                 view.show_contacts(model.search_contact(view.find_contact()))
