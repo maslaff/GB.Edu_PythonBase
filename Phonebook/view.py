@@ -1,3 +1,9 @@
+import os
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def get_num(msg, max=999, min=1):
     while True:
         try:
@@ -15,6 +21,7 @@ def get_num(msg, max=999, min=1):
 
 
 def main_menu():
+    clear()
     commands = ['Показать все контакты',
                 'Открыть файл',
                 'Сохранить файл',
@@ -29,7 +36,11 @@ def main_menu():
     return get_num('\nВведите пункт меню: ', len(commands))
 
 
-def show_contacts(phonebook: list):
+def show_contacts(phonebook: list, clr=False):
+    if clr: clear()
+    _print_contacts(phonebook)
+
+def _print_contacts(phonebook: list):
     if len(phonebook):
         for i, it in enumerate(phonebook):
             print(f" {i+1}) {it[0]} - {it[1]} ({it[2]})")
@@ -45,8 +56,22 @@ def save_succes():
     print('Телефонная книга сохранена')
 
 
+def remove_succes(contact):
+    print('Контакт удален\n{contact}')
+
+def add_succes(contact):
+    print('Контакт добавлен\n{contact}')
+
+def remove_succes(contact):
+    print('Контакт удален\n{contact}')
+
+def change_succes(contact):
+    print('Контакт изменен\n{contact}')
+
+
 def new_contact():
-    new = []
+    clear()
+    print("Создать контакт > > >")
     name = input('Введите Имя Фамилию: ').capitalize()
     number = input('Введите номер: ')
     comment = input('Введите комментарий: ')
@@ -55,12 +80,14 @@ def new_contact():
 
 
 def find_contact():
+    print("Найти контакт > > >")
     return input('Введите запрос: ')
 
 
 def edit_contact(phonebook: list):
-    print('Изменить контакт:')
-    show_contacts(phonebook)
+    clear()
+    print('Изменить контакт > > >')
+    _print_contacts(phonebook)
     contact = get_num('Выберите контакт: ', len(phonebook))
     print('  1)  Имя Фамилия\n  2)  Номер телефона\n   3) Комментарий')
     field = get_num('Введите поле для изменения: ', 3)
@@ -69,5 +96,6 @@ def edit_contact(phonebook: list):
 
 
 def delete_contact(phonebook: list):
-    show_contacts(phonebook)
+    print("Удалить контакт > > >")
+    _print_contacts(phonebook)
     return get_num('Введите номер контакта: ', len(phonebook))
