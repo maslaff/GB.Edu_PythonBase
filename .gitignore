@@ -3,3 +3,7 @@ file_b
 file_sum
 pbase/
 */__pycache__/
+S9HW_TelegramBot/token.py
+S9HW_TelegramBot/tkn.py
+.idea/
+S9HW_TelegramBot/handlers/__pycache__/
