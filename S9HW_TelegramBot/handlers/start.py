@@ -18,6 +18,7 @@ async def mes_start(message: Message):
             'on_table': game.max_total,
             'set_max': 'new'
         }
+        print(f"{message.from_user.full_name} начал новую игру.")
 
 
 @dp.message_handler(commands=['put'])
@@ -26,3 +27,4 @@ async def mes_max(message: Message):
             game.total[message.from_user.id].get('set_max') == 'new':
         await message.answer('Сколько бы ты хотел конфет на столе?')
         game.total[message.from_user.id].update(set_max='set')
+        print(f"{message.from_user.full_name} решил изменить количество конфет.")

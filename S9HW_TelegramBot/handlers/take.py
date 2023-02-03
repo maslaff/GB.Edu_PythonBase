@@ -10,10 +10,12 @@ async def exit(message: Message):
     if message.from_user.id in game.total:
         game.total.pop(message.from_user.id)
         await message.answer('Как хочешь. Рады были видеть.\n/start для новой игры')
+        print(f"{message.from_user.full_name} вышел из игры.")
 
 
 @dp.message_handler()
 async def mes_game(message: Message):
+    print(f"{message.from_user.full_name} написал - {message.text}")
     if message.from_user.id in game.total:
         count = message.text
         if count.isdigit():
@@ -24,17 +26,25 @@ async def mes_game(message: Message):
                 usr_data.update(on_table=count)
                 usr_data.update(set_max=False)
                 await message.answer(f"Прекрасно! Теперь на столе {count} конфет. Давай играть.\nБери конфеты...")
+                print(
+                    f"{message.from_user.full_name} изменил количество конфет на {count}.")
+
             elif 0 < count < 29:
                 uname = usr_data.get('name')
                 sweets = usr_data.get('on_table')
                 sweets -= count
+                print(
+                    f"{message.from_user.full_name} взял {count} конфет, осталось {sweets}.")
                 if await check_win(message, usr, f"{uname} победил! Поздравляю!", sweets):
                     return
                 await message.answer(f"{uname} взял {count} конфет и на столе осталось {sweets}\n"
                                      f'Теперь ход бота...')
+
                 bot_take = sweets % 28-1 if sweets > 28 else sweets
                 bot_take = bot_take if bot_take > 0 else random.randint(1, 28)
                 sweets -= bot_take
+                print(
+                    f"Бот взял {bot_take} конфет, осталось {sweets}.")
                 if await check_win(message, usr, "Виталий Бот победил! Поздравим его!", sweets):
                     return
                 await message.answer(f'Бот Виталий взял {bot_take} конфет и '
@@ -48,15 +58,19 @@ async def mes_game(message: Message):
                     await message.answer('Договаривались 28, куда столько потащил!?')
                 else:
                     await message.answer('Что это такое?')
+                print(f"вне - {count}")
                 return
-            game.total.update((usr, usr_data))
+            game.total[usr] = usr_data
         else:
             await message.answer(f'Введите число от 1 до 28')
+            print(f"не число - {count}")
 
 
 async def check_win(message: Message, usr: int, text: str, ontable: int):
     if ontable <= 0:
         await message.answer(f"{text}\n/start для новой игры.")
         game.total.pop(usr)
+        print(text)
+
         return True
     return False
