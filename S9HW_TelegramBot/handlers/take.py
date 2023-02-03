@@ -9,7 +9,7 @@ import game
 async def exit(message: Message):
     if message.from_user.id in game.total:
         game.total.pop(message.from_user.id)
-        await message.answer('Как хочешь. Рады были видеть.')
+        await message.answer('Как хочешь. Рады были видеть.\n/start для новой игры')
 
 
 @dp.message_handler()
@@ -20,10 +20,10 @@ async def mes_game(message: Message):
             count = int(count)
             usr = message.from_user.id
             usr_data: dict = game.total[usr]
-            if usr_data.get('set_max'):
+            if usr_data.get('set_max') == 'set':
                 usr_data.update(on_table=count)
                 usr_data.update(set_max=False)
-                await message.answer(f"Прекрасно! Теперь на столе {count} конфет. Давай играть.")
+                await message.answer(f"Прекрасно! Теперь на столе {count} конфет. Давай играть.\nБери конфеты...")
             elif 0 < count < 29:
                 uname = usr_data.get('name')
                 sweets = usr_data.get('on_table')
@@ -56,7 +56,7 @@ async def mes_game(message: Message):
 
 async def check_win(message: Message, usr: int, text: str, ontable: int):
     if ontable <= 0:
-        await message.answer(text)
+        await message.answer(f"{text}\n/start для новой игры.")
         game.total.pop(usr)
         return True
     return False
