@@ -33,8 +33,7 @@ async def mes_game(message: Message):
                 await message.answer(f"{uname} взял {count} конфет и на столе осталось {sweets}\n"
                                      f'Теперь ход бота...')
                 bot_take = sweets % 28-1 if sweets > 28 else sweets
-                bot_take = bot_take if bot_take > 0 else random.randint(
-                    1, 28)
+                bot_take = bot_take if bot_take > 0 else random.randint(1, 28)
                 sweets -= bot_take
                 if await check_win(message, usr, "Виталий Бот победил! Поздравим его!", sweets):
                     return
